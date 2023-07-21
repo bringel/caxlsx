@@ -26,6 +26,8 @@ module Axlsx
     # @return [String]
     attr_reader :series_color
 
+    attr_reader :trendline_type, :trendline_period
+
     # Creates a new series
     # @option options [Array, SimpleTypedList] data
     # @option options [Array, SimpleTypedList] labels
@@ -55,6 +57,14 @@ module Axlsx
       @shape = v
     end
 
+    def trendline_type=(v)
+      @trendline_type = v
+    end
+
+    def trendline_period=(v)
+      @trendline_period = v
+    end
+
     # Serializes the object
     # @param [String] str
     # @return [String]
@@ -73,6 +83,15 @@ module Axlsx
           str << '<a:srgbClr val="' << series_color << '"/>'
           str << '</a:solidFill>'
           str << '</c:spPr>'
+        end
+
+        if trendline_type
+          str << '<c:trendline>'
+          str << '<c:trendlineType val="' << trendline_type << '"/>'
+          if trendline_period
+            str << '<c:trendlinePeriod val="' << trendline_period << '"/>'
+          end
+          str << '</c:trendline>'
         end
 
         @labels.to_xml_string(str) unless @labels.nil?
