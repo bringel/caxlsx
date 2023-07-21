@@ -89,7 +89,7 @@ module Axlsx
           str << '<c:trendline>'
           str << '<c:trendlineType val="' << trendline_type << '"/>'
           if trendline_period
-            str << '<c:trendlinePeriod val="' << trendline_period << '"/>'
+            str << '<c:period val="' << trendline_period << '"/>'
           end
           str << '</c:trendline>'
         end
